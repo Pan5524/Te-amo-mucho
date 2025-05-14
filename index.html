@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carta para la mejor soldadora</title>
+    <style>
+      body {
+        margin: 0;
+        background-color: #fff0f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        font-family: sans-serif;
+      }
+
+      .contenedor {
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+
+      .tulipan {
+        width: 80px;
+        height: auto;
+        margin: 0 60px;
+        animation: ondular 3s ease-in-out infinite alternate;
+        transform-origin: bottom center;
+      }
+
+      @keyframes ondular {
+        0% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(5deg);
+        }
+        100% {
+          transform: rotate(-5deg);
+        }
+      }
+
+      .carta {
+        width: 320px;
+        height: 200px;
+        position: relative;
+        perspective: 1000px;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .carta-interior {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform-style: preserve-3d;
+        transition: transform 1s;
+      }
+
+      .carta.abierta .carta-interior {
+        transform: rotateY(180deg);
+      }
+
+      .frontal,
+      .trasera {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 5px solid;
+      }
+
+      .frontal {
+        background-color: #ff66b2;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        border-color: white;
+      }
+
+      .trasera {
+        background-color: white;
+        color: #e91e63;
+        transform: rotateY(180deg);
+        font-size: 16px;
+        text-align: center;
+        padding: 20px;
+        border-color: #ff66b2;
+        line-height: 1.5;
+      }
+
+      .confeti {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: gold;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: caer 2s linear forwards;
+        z-index: 0;
+      }
+
+      @keyframes caer {
+        0% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(300px) scale(0.5);
+        }
+      }
+      .corazon-clic {
+        position: absolute;
+        animation: flotar-clic 1s ease-out forwards;
+        font-size: 24px;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      @keyframes flotar-clic {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-80px) scale(1.6);
+          opacity: 0;
+        }
+      }
+      .corazon-clic {
+        position: absolute;
+        animation: explotar-clic 1s ease-out forwards;
+        pointer-events: none;
+        z-index: 1000;
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+
+      @keyframes explotar-clic {
+        to {
+          transform: translate(var(--x), var(--y)) scale(1.5);
+          opacity: 0;
+        }
+      }
+      .frase-superior {
+        position: fixed;
+        top: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 8px #fff, 0 0 12px #f0f, 0 0 18px #f0f;
+        z-index: 1000;
+        animation: mover-letras 3s infinite ease-in-out alternate;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      @keyframes mover-letras {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-3px);
+        }
+      #corazones-flotando-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  border: 15px solid #ff1493; /* rosa fuerte */
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: brillar-marco 2s infinite ease-in-out;
+  box-shadow:
+    0 0 10px #ff69b4,
+    0 0 20px #ff69b4,
+    0 0 30px #ff1493,
+    0 0 40px #ff1493;
+}
+
+@keyframes brillar-marco {
+  0% {
+    box-shadow:
+      0 0 5px #ff69b4,
+      0 0 10px #ff69b4,
+      0 0 20px #ff1493,
+      0 0 30px #ff1493;
+  }
+  50% {
+    box-shadow:
+      0 0 15px #ff69b4,
+      0 0 25px #ff69b4,
+      0 0 35px #ff1493,
+      0 0 45px #ff1493;
+  }
+  100% {
+    box-shadow:
+      0 0 5px #ff69b4,
+      0 0 10px #ff69b4,
+      0 0 20px #ff1493,
+      0 0 30px #ff1493;
+  }
+}
+#marco-brillante {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  border: 15px solid #ff1493; /* rosa fuerte */
+  border-radius: 15px;
+  z-index: 9999;
+  pointer-events: none;
+  animation: brillar-marco 2.5s infinite ease-in-out;
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="marco-brillante"></div>
+
+    <div class="frase-superior">
+  🍓 A pesar de todo yo siempre estaré para ti sin importar lo que pase,porque te amo mucho 🍓
+</div>
+
+      <!-- Tulipán izquierdo -->
+      <img class="tulipan" src="fotos/Flores.png" alt="Tulipán izquierdo" />
+
+      <!-- Carta -->
+      <div class="carta" id="carta">
+        <div class="carta-interior">
+          <div class="frontal">💌💫Haz clic para abrir💫💌</div>
+          <div class="trasera">
+            <h3>
+              Eres la mejor novia del mundo <br />estoy orgulloso de ti, Te amo Ari💖
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tulipán derecho -->
+      <img class="tulipan" src=fotos/Flores.png alt="Tulipán derecho" />
+    </div>
+    <!-- Música -->
+    <audio id="musica" src="Musica/Labios Rotos - Zoé __ Letra. ♡.mp3"></audio>
+    <script>
+      const carta = document.getElementById("carta");
+      const musica = document.getElementById("musica");
+
+      carta.addEventListener("click", () => {
+        carta.classList.toggle("abierta");
+        musica.play();
+
+        for (let i = 0; i < 50; i++) {
+          const confeti = document.createElement("div");
+          confeti.classList.add("confeti");
+          confeti.style.left = Math.random() * window.innerWidth + "px";
+          confeti.style.top = Math.random() * 50 + "px";
+          confeti.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+          confeti.style.animationDelay = Math.random() * 0.5 + "s";
+          document.body.appendChild(confeti);
+          setTimeout(() => confeti.remove(), 2000);
+        }
+      });
+      // Corazones al hacer clic
+      document.addEventListener("click", (e) => {
+        const corazon = document.createElement("div");
+        corazon.classList.add("corazon-clic");
+        corazon.innerText = "💖";
+        corazon.style.left = e.clientX + "px";
+        corazon.style.top = e.clientY + "px";
+        document.body.appendChild(corazon);
+
+        setTimeout(() => {
+          corazon.remove();
+        }, 1000);
+      });
+      // Explosión de corazones al hacer clic
+      document.addEventListener("click", (e) => {
+        for (let i = 0; i < 5; i++) {
+          const corazon = document.createElement("div");
+          corazon.classList.add("corazon-clic");
+          corazon.innerText = "💖";
+
+          // Posición inicial en el clic
+          corazon.style.left = `${e.clientX}px`;
+          corazon.style.top = `${e.clientY}px`;
+
+          // Movimiento aleatorio
+          const offsetX = (Math.random() - 0.5) * 100;
+          const offsetY = Math.random() * -100;
+          corazon.style.setProperty("--x", `${offsetX}px`);
+          corazon.style.setProperty("--y", `${offsetY}px`);
+          corazon.style.fontSize = `${20 + Math.random() * 20}px`;
+
+          document.body.appendChild(corazon);
+
+          // Remover después de 1s
+          setTimeout(() => corazon.remove(), 1000);
+        }
+      });
+    </script>
+  </body>
+</html>
